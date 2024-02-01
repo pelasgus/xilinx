@@ -40,6 +40,12 @@ install_nix() {
   curl -L https://nixos.org/nix/install | sh -s -- --daemon
 }
 
+# Function to enable experimental features in Nix
+enable_experimental_features() {
+  export NIX_ENABLE_EXPERIMENTAL_FLAKES=1
+  export NIX_EXPURGE=1
+}
+
 # Function to install QEMU using Nix flake
 install_qemu_flake() {
   print_colored "Installing QEMU using Nix flake..."
