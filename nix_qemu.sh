@@ -48,8 +48,7 @@ backup_and_check_bashrc() {
   if [ -f "$backup_path" ]; then
     # Check if the backup contains mentions of nix
     if grep -q "nix" "$backup_path"; then
-      # Remove the backup file if it contains mentions of nix
-      rm -f "$backup_path"
+      handle_error "Backup file $backup_path contains mentions of Nix. Please clean it up manually."
     else
       # Restore the original bashrc if the backup doesn't contain mentions of nix
       mv "$backup_path" "/etc/bashrc"
