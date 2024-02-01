@@ -28,6 +28,12 @@ uninstall_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 }
 
+# Check if the script is run with sudo
+if [ "$(id -u)" != "0" ]; then
+  echo "This script requires sudo privileges. Please run with sudo."
+  exit 1
+fi
+
 # Main script
 
 # Uninstall qemu package
