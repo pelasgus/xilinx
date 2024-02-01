@@ -72,6 +72,14 @@ validate_path() {
 # Function to check if a command is available
 check_command() {
   local command_name="$1"
+
+  if [ "$(uname -m)" == "x86_64" ]; then
+    # On x86_64 architecture, check for specific QEMU executable
+    command_name="qemu-system-x86_64"
+  elif [ "$(uname -m)" == "aarch64" ]; then
+    # On aarch64 (ARM) architecture, check for specific QEMU executable
+    command_name="qemu-system-aarch64"
+  fi
   
   command -v "$command_name" >/dev/null 2>&1
 }
@@ -100,11 +108,11 @@ install_qemu() {
     print_colored "Homebrew is already installed."
   fi
 
-  print_colored "Using Homebrew to install QEMU..."
-  brew install qemu
+  # Install QEMU for x86_64 and aarch64 architectures
+  brew install qemu qemu-system-aarch64
 
   # Check if QEMU installation was successful
-  if check_command "qemu-system"; then
+  if check_command "qemu-system-x86_64" && check_command "qemu-system-aarch64"; then
     print_colored "QEMU has been installed successfully."
   else
     print_colored "Error: QEMU installation failed. Please check the installation and try again."
@@ -157,7 +165,7 @@ construct_qemu_options() {
   )
 
   # Enable Rosetta acceleration on Apple Silicon
-  if [ "$IS_APPLE_SILICON" == true ]; then
+  if [ "$(uname -m)" == "arm64" ]; then
     qemu_options+=(-cpu "max,rosetta2")
   fi
 
@@ -197,7 +205,7 @@ initialize_script() {
   detect_cpu_architecture
 
   # Check if QEMU is installed
-  if ! check_command "qemu-system"; then
+  if ! check_command "qemu-system-x86_64" && ! check_command "qemu-system-aarch64"; then
     install_qemu
   fi
 
