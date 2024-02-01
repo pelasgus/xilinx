@@ -22,11 +22,6 @@ log_message() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - $message" >> "script_log.txt"
 }
 
-# Function to check if a command is available
-command_exists() {
-  command -v "$1" &> /dev/null
-}
-
 # Function to handle errors
 handle_error() {
   local error_message="$1"
@@ -34,10 +29,32 @@ handle_error() {
   exit 1
 }
 
+# Function to check if a command is available
+command_exists() {
+  command -v "$1" &> /dev/null
+}
+
 # Function to install Nix package manager
 install_nix() {
   print_colored "Installing Nix package manager..."
   curl -L https://nixos.org/nix/install | sh -s -- --daemon
+}
+
+# Function to backup and check /etc/bashrc
+backup_and_check_bashrc() {
+  local backup_path="/etc/bashrc.backup-before-nix"
+
+  # Check if the backup exists
+  if [ -f "$backup_path" ]; then
+    # Check if the backup contains mentions of nix
+    if grep -q "nix" "$backup_path"; then
+      # Remove the backup file if it contains mentions of nix
+      rm -f "$backup_path"
+    else
+      # Restore the original bashrc if the backup doesn't contain mentions of nix
+      mv "$backup_path" "/etc/bashrc"
+    fi
+  fi
 }
 
 # Function to enable experimental features in Nix
@@ -73,7 +90,11 @@ convert_vmdk_to_qemu() {
 
 # Function to check dependencies
 check_dependencies() {
-  command_exists nix || install_nix || handle_error "Nix installation failed."
+  command_exists nix || {
+    backup_and_check_bashrc
+    install_nix || handle_error "Nix installation failed."
+  }
+
   command_exists qemu || install_qemu_flake || handle_error "QEMU installation failed."
 }
 
