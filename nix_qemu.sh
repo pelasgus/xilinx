@@ -37,7 +37,7 @@ handle_error() {
 # Function to install Nix package manager
 install_nix() {
   print_colored "Installing Nix package manager..."
-  sh <(curl -L https://nixos.org/nix/install) --daemon
+  curl -L https://nixos.org/nix/install | sh -s -- --daemon
 }
 
 # Function to install QEMU using Nix flake
