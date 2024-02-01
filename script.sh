@@ -11,9 +11,6 @@ RESET='\033[0m'
 # Configuration file path
 CONFIG_FILE=".vm_config"
 
-# QEMU download URL
-QEMU_DOWNLOAD_URL="https://www.qemu.org/download"
-
 # Function to print colored text
 print_colored() {
   echo -e "${PURPLE}${BOLD}$1${RESET}"
@@ -72,19 +69,10 @@ validate_path() {
 # Function to check if a command is available
 check_command() {
   local command_name="$1"
-
-  if [ "$(uname -m)" == "x86_64" ]; then
-    # On x86_64 architecture, check for specific QEMU executable
-    command_name="qemu-system-x86_64"
-  elif [ "$(uname -m)" == "aarch64" ]; then
-    # On aarch64 (ARM) architecture, check for specific QEMU executable
-    command_name="qemu-system-aarch64"
-  fi
-  
   command -v "$command_name" >/dev/null 2>&1
 }
 
-# Function to download and install Homebrew
+# Function to install Homebrew
 install_homebrew() {
   print_colored "Homebrew is not installed. Attempting to install Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -98,7 +86,7 @@ install_homebrew() {
   fi
 }
 
-# Function to download and install QEMU
+# Function to install QEMU
 install_qemu() {
   print_colored "Checking if Homebrew is installed..."
 
@@ -108,11 +96,11 @@ install_qemu() {
     print_colored "Homebrew is already installed."
   fi
 
-  # Install QEMU for x86_64 and aarch64 architectures
-  brew install qemu qemu-system-aarch64
+  # Install QEMU using Homebrew
+  brew install qemu
 
   # Check if QEMU installation was successful
-  if check_command "qemu-system-x86_64" && check_command "qemu-system-aarch64"; then
+  if check_command "qemu-system"; then
     print_colored "QEMU has been installed successfully."
   else
     print_colored "Error: QEMU installation failed. Please check the installation and try again."
@@ -205,7 +193,7 @@ initialize_script() {
   detect_cpu_architecture
 
   # Check if QEMU is installed
-  if ! check_command "qemu-system-x86_64" && ! check_command "qemu-system-aarch64"; then
+  if ! check_command "qemu-system"; then
     install_qemu
   fi
 
