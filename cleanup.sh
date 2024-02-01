@@ -1,6 +1,9 @@
 # cleanup.sh
 # author: D.A.Pelasgus
 
+# cleanup.sh
+# author: D.A.Pelasgus
+
 #!/bin/bash
 
 # ANSI color codes
@@ -28,6 +31,24 @@ uninstall_homebrew() {
   sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 }
 
+# Function to uninstall Nix in multi-user mode
+uninstall_nix_multiuser() {
+  print_prompt "Uninstalling Nix (Multi-User)"
+  sudo rm -rf /nix
+  sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo rm /etc/nix/nix.conf
+}
+
+# Function to uninstall Nix in single-user mode
+uninstall_nix_singleuser() {
+  print_prompt "Uninstalling Nix (Single-User)"
+  rm -rf $HOME/.nix-profile
+  rm -rf $HOME/.nix-defexpr
+  rm -rf $HOME/.nix-channels
+  rm $HOME/.nixrc
+}
+
 # Main script
 
 # Check if the script is run with sudo
@@ -42,6 +63,12 @@ uninstall_package "qemu"
 # Uninstall Homebrew
 uninstall_homebrew
 
+# Uninstall Nix (Multi-User)
+uninstall_nix_multiuser
+
+# Uninstall Nix (Single-User)
+uninstall_nix_singleuser
+
 # Check if qemu still exists
 if command -v qemu &> /dev/null; then
   echo "QEMU is still installed."
@@ -54,4 +81,11 @@ if command -v brew &> /dev/null; then
   echo "Homebrew is still installed."
 else
   echo "Homebrew has been successfully uninstalled."
+fi
+
+# Check if Nix still exists
+if command -v nix &> /dev/null; then
+  echo "Nix is still installed."
+else
+  echo "Nix has been successfully uninstalled."
 fi
