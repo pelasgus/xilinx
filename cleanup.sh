@@ -16,7 +16,7 @@ print_prompt() {
 uninstall_package() {
   print_prompt "Uninstalling Homebrew package: $1"
   if brew list | grep -q "$1"; then
-    brew uninstall "$1"
+    sudo brew uninstall "$1"
   else
     echo "Package $1 is not installed."
   fi
@@ -25,16 +25,16 @@ uninstall_package() {
 # Function to uninstall Homebrew
 uninstall_homebrew() {
   print_prompt "Uninstalling Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+  sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 }
+
+# Main script
 
 # Check if the script is run with sudo
 if [ "$(id -u)" != "0" ]; then
-  echo "This script requires sudo privileges. Please run with sudo."
-  exit 1
+  echo "This script requires sudo privileges. To run with sudo, please enter your password below:"
+  sudo -v
 fi
-
-# Main script
 
 # Uninstall qemu package
 uninstall_package "qemu"
