@@ -76,18 +76,32 @@ check_command() {
   command -v "$command_name" >/dev/null 2>&1
 }
 
-# Function to download and install QEMU
-install_qemu() {
-  print_colored "QEMU is not installed. Attempting to install..."
+# Function to download and install Homebrew
+install_homebrew() {
+  print_colored "Homebrew is not installed. Attempting to install Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  # Check if brew is available
+  # Check if Homebrew installation was successful
   if check_command "brew"; then
-    print_colored "Using Homebrew to install QEMU..."
-    brew install qemu
+    print_colored "Homebrew has been installed successfully."
   else
-    print_colored "Error: Homebrew is not installed. Please install it before proceeding."
+    print_colored "Error: Homebrew installation failed. Please check the installation and try again."
     exit 1
   fi
+}
+
+# Function to download and install QEMU
+install_qemu() {
+  print_colored "Checking if Homebrew is installed..."
+
+  if ! check_command "brew"; then
+    install_homebrew
+  else
+    print_colored "Homebrew is already installed."
+  fi
+
+  print_colored "Using Homebrew to install QEMU..."
+  brew install qemu
 
   # Check if QEMU installation was successful
   if check_command "qemu-system"; then
