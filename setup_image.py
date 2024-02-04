@@ -22,6 +22,11 @@ def convert_image():
     try:
         subprocess.run(["qemu-img", "convert", "-f", "vmdk", "-O", "qcow2", vmdk_file], check=True)
         print(style_text("Conversion successful!", bold=True, color="purple"))
+
+        # Delete the original .vmdk file
+        os.remove(vmdk_file)
+        print(style_text(f"Original {vmdk_file} deleted.", bold=True, color="purple"))
+
     except subprocess.CalledProcessError as e:
         print(style_text(f"Error during conversion: {e}", bold=True, color="purple"))
 
