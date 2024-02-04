@@ -1,28 +1,25 @@
-# flake.nix
+# flake_qemu.nix
 # author: D.A.Pelasgus
 
 {
-  description = "QEMU Flake";
+  description = "QEMU flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-21.11;
+
+    qemu.url = github:NixOS/nixpkgs/nixos/modules/virtualisation/qemu/qemu-vanilla.nix;
+    qemu.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = flake-utils.lib.eachDefaultSystem (system:
-    let
-      nixpkgs = import inputs.nixpkgs { inherit system; };
-      flake-utils = inputs.flake-utils.lib;
+  outputs = { self, nixpkgs, qemu }: {
+    nixosConfigurations.x86_64-linux = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ qemu.nixosModules.qemu ];
+    };
 
-      qemu = nixpkgs.callPackage ./qemu.nix { };
-    in
-    {
-      packages.x86_64-linux = qemu;
-      packages.aarch64-linux = qemu;
-      packages.x86_64-darwin = qemu;
-      defaultPackage.x86_64-linux = qemu;
-      defaultPackage.aarch64-linux = qemu;
-      defaultPackage.x86_64-darwin = qemu;
-    }
-  );
+    nixosConfigurations.aarch64-linux = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [ qemu.nixosModules.qemu ];
+    };
+  };
 }
