@@ -38,7 +38,7 @@ def unzip_untar_move_cleanup():
 
     os.chdir(ova_folder_path)
 
-    # Step 7: Move the contents of 'ova' to Documents/xinix/installation
+    # Step 7: Move the contents of 'ova' to Documents/xinix/installation and rename to "vm.vmdk"
     documents_path = os.path.expanduser('~' + os.sep + 'Documents')
     xinix_path = os.path.join(documents_path, 'xinix')
     installation_path = os.path.join(xinix_path, 'installation')
@@ -49,7 +49,8 @@ def unzip_untar_move_cleanup():
     for item in os.listdir(ova_folder_path):
         item_path = os.path.join(ova_folder_path, item)
         if os.path.isfile(item_path):
-            shutil.move(item_path, installation_path)
+            # Rename to "vm.vmdk" during the move
+            shutil.move(item_path, os.path.join(installation_path, "vm.vmdk"))
 
     # Step 8: Delete everything else from the contents of 'ova'
     for remaining_item in os.listdir(ova_folder_path):
