@@ -18,7 +18,7 @@ if [ "$choice" = "install" ]; then
     ./setup.sh  # Replace with the actual setup script name
 elif [ "$choice" = "uninstall" ]; then
     echo -e "${PURPLE_BOLD}Uninstalling Xilinx product...${RESET}"
-    ./cleanup.sh  # Replace with the actual cleanup script name
+    ./uninstall.sh  # Replace with the actual cleanup script name
 else
     echo -e "${PURPLE_BOLD}Invalid choice. Please enter 'install' or 'uninstall'.${RESET}"
     exit 1
