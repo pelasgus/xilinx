@@ -14,8 +14,8 @@ def install_nix():
     else:
         print(style_text("Nix not found. Installing Nix..."))
 
-        # Perform a multi-user installation using the official script with daemon flag
-        subprocess.run(['sh', '-c', "curl -L https://nixos.org/nix/install | sh -s -- --daemon"], check=True, stdout=subprocess.PIPE)
+        # Perform a multi-user installation using the official script with daemon flag and experimental features
+        subprocess.run(['sh', '-c', 'curl -L https://nixos.org/nix/install | sh -s -- --daemon --experimental-features "nix-command flakes"'], check=True, stdout=subprocess.PIPE)
 
 def main():
     install_nix()
