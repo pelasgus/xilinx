@@ -24,4 +24,4 @@ jobs:
       run: ./run.sh
     
     - name: Type 'install'
-      run: echo "install"
+      run: install
