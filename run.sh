@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Import styles.sh
-source ./styles.sh
+source ./styles/styles.sh
 
 style_text "Welcome to Xilinx Product Installer/Uninstaller"
 
@@ -11,10 +11,11 @@ read -p "Choice: " choice
 
 if [ "$choice" = "install" ]; then
     style_text "Installing Xilinx product..."
-    ./setup.sh  # Replace with the actual setup script name
+    ./setup/setup_python.sh
 elif [ "$choice" = "uninstall" ]; then
     style_text "Uninstalling Xilinx product..."
-    ./uninstall.sh  # Replace with the actual cleanup script name
+    ./uninstall.sh
+    ./mac_cleanup
 else
     style_text "Invalid choice. Please enter 'install' or 'uninstall'."
     exit 1
