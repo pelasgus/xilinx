@@ -1,0 +1,24 @@
+name: Run Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_script:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Make run.sh executable
+      run: chmod +x run.sh
+
+    - name: Run run.sh
+      run: ./run.sh
