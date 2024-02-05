@@ -35,6 +35,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Chainlink
-subprocess.run(['python3', './setup_nix.py'])

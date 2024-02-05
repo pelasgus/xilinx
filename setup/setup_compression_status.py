@@ -11,6 +11,10 @@ def prompt_user():
 def handle_yes():
     print(style_text("Calling setup_directory.py..."))
     subprocess.run(['python3', './setup/setup_directory.py'])
+    print(style_text("Calling setup_nix.py..."))
+    subprocess.run(['python3', './setup/setup_nix.py'])
+    print(style_text("Calling setup_qemu.py..."))
+    subprocess.run(['python3', './setup/setup_qemu.py'])
     print(style_text("Calling setup_image.py..."))
     subprocess.run(['python3', './setup/setup_image.py'])
 
@@ -20,6 +24,13 @@ def handle_no():
         print(style_text("No further action needed."))
     else:
         print(style_text("Please ensure the VM file is named 'vm.vmdk' and placed in 'Documents/xilinx/installation'."))
+
+    print(style_text("Calling setup_nix.py..."))
+    subprocess.run(['python3', './setup/setup_nix.py'])
+    print(style_text("Calling setup_qemu.py..."))
+    subprocess.run(['python3', './setup/setup_qemu.py'])
+    print(style_text("Calling setup_image.py..."))
+    subprocess.run(['python3', './setup/setup_image.py'])
 
 if __name__ == "__main__":
     user_choice = prompt_user()
