@@ -10,11 +10,11 @@ from styles import style_text
 
 def unzip_untar_move_cleanup():
     # Step 1: Request user to enter a path
-    user_path = input("Enter the path to the compressed file: ").strip()
+    user_path = input(style_text("Enter the path to the compressed file: ")).strip()
 
     # Step 2: Verify that the path ends in a compress file
     if not (user_path.endswith('.zip') or user_path.endswith('.tar.gz')):
-        print("Error: The provided file is not a valid compressed file.")
+        print(style_text("Error: The provided file is not a valid compressed file."))
         return
 
     # Step 3: Unzip/Untar the file
@@ -35,7 +35,7 @@ def unzip_untar_move_cleanup():
     # Step 6: Navigate to the internal folder 'ova'
     ova_folder_path = os.path.join(destination_folder, 'ova')
     if not os.path.exists(ova_folder_path):
-        print("Error: 'ova' folder not found in the extracted contents.")
+        print(style_text("Error: 'ova' folder not found in the extracted contents."))
         return
 
     os.chdir(ova_folder_path)
@@ -66,10 +66,7 @@ def unzip_untar_move_cleanup():
     os.chdir(documents_path)
     shutil.rmtree(destination_folder)
 
-    print("Unzipping, moving, and cleanup completed successfully.")
+    print(style_text("Unzipping, moving, and cleanup completed successfully."))
 
 if __name__ == "__main__":
     unzip_untar_move_cleanup()
-
-# Chainlink
-subprocess.run(['python3', './setup_image.py'])
