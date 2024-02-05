@@ -1,10 +1,12 @@
-# setup.py
+# setup_directory.py
 # author: D.A.Pelasgus
 
 import os
 import shutil
 import tarfile
 import zipfile
+import subprocess
+from styles import style_text
 
 def unzip_untar_move_cleanup():
     # Step 1: Request user to enter a path
@@ -68,3 +70,6 @@ def unzip_untar_move_cleanup():
 
 if __name__ == "__main__":
     unzip_untar_move_cleanup()
+
+# Chainlink
+subprocess.run(['python3', './setup_image.py'])

@@ -1,5 +1,6 @@
 # styles.py
 # author: D.A.Pelasgus
+
 import subprocess
 
 def style_text(text):

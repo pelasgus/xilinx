@@ -39,4 +39,4 @@ else
 fi
 
 # Run the Python script
-python3 directory_setup.py
+python3 setup_directory.py
