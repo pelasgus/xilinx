@@ -18,7 +18,7 @@ chmod +x ./setup/setup_nix.py
 chmod +x ./setup/setup_qemu.py
 chmod +x ./setup/setup_image.py
 chmod +x ./setup/setup_compression_status.py
-chmod +x ./flake_qemu.nix
+chmod +x ./setup/flake_qemu.nix
 
 style_text "Welcome to Xilinx Product Installer/Uninstaller"
 
