@@ -25,5 +25,6 @@ jobs:
 
     - name: Run script `hotfix.py`
       run: |
+       python3 ./hotfix.py
        python3 ./setup/setup_nix.py
        python3 ./setup/setup_qemu.py
