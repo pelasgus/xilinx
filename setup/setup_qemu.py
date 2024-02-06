@@ -1,6 +1,8 @@
 # setup_qemu.py
 # author: D.A.Pelasgus
 
+#!/usr/bin/env python3
+
 import subprocess
 import sys
 

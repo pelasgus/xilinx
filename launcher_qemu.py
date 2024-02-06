@@ -1,6 +1,8 @@
 # launcher_qemu.py
 # author: D.A.Pelasgus
 
+#!/usr/bin/env python3
+
 import os
 import subprocess
 import logging

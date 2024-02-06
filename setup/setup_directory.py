@@ -1,6 +1,8 @@
 # setup_directory.py
 # author: D.A.Pelasgus
 
+#!/usr/bin/env python3
+
 import os
 import shutil
 import tarfile

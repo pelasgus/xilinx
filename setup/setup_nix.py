@@ -1,6 +1,8 @@
 # setup_nix.py
 # author: D.A.Pelasgus
 
+#!/usr/bin/env python3
+
 import os
 import subprocess
 import sys

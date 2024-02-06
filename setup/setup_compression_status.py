@@ -1,6 +1,8 @@
 # setup_compression_status.py
 # author: D.A.Pelasgus
 
+#!/usr/bin/env python3
+
 import subprocess
 import sys
 import os
