@@ -27,6 +27,3 @@ logging.info("Calling setup_qemu.py...")
 subprocess.run(['python3', os.path.join(parent_dir, 'setup', 'setup_qemu.py')], check=True)
 # logging.info("Calling setup_image.py...")
 # subprocess.run(['python3', os.path.join(parent_dir, 'setup', 'setup_image.py')], check=True)
-except subprocess.CalledProcessError as e:
-logging.error(f"Error occurred: {e}")
-print(style_text("An error occurred during setup. Please check the logs for details."))
