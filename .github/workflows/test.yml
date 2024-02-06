@@ -22,4 +22,4 @@ jobs:
 
     - name: Run run.sh
       run: sudo ./run.sh
-        run: echo "install"
+      run: echo "install"
