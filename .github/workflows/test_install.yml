@@ -21,6 +21,4 @@ jobs:
 
     - name: Run script `run.sh` and wait for user input
       run: |
-        sudo ./run.sh
-        echo "Waiting for user input..."
-        send "install\r"
+        sudo ./run.sh install
