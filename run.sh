@@ -1,12 +1,15 @@
-# run.sh
-# author: D.A.Pelasgus
-
 #!/bin/bash
 
 # Import styles.sh
-source ./styles/styles.sh
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source "$SCRIPT_DIR/styles/styles.sh"
 
-style_text "Welcome to Xilinx Product Installer/Uninstaller"
+# Function for error handling
+handle_error() {
+    local error_message="$1"
+    style_error "$error_message"
+    exit 1
+}
 
 # Check if script is running as root
 if [ "$EUID" -ne 0 ]; then
@@ -17,29 +20,29 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Make scripts executable
-chmod +x ./styles/styles.py
-chmod +x ./styles/styles.sh
-chmod +x ./uninstall.sh
-chmod +x ./mac_cleanup.sh
-chmod +x ./launcher_qemu.py
-chmod +x ./setup/setup_python.sh
-chmod +x ./setup/setup_directory.py
-chmod +x ./setup/setup_nix.py
-chmod +x ./setup/setup_qemu.py
-chmod +x ./setup/setup_image.py
-chmod +x ./setup/setup_compression_status.py
-chmod +x ./setup/flake_qemu.nix
+chmod +x "$SCRIPT_DIR/styles/styles.py" || handle_error "Failed to make styles.py executable"
+chmod +x "$SCRIPT_DIR/styles/styles.sh" || handle_error "Failed to make styles.sh executable"
+chmod +x "$SCRIPT_DIR/uninstall.sh" || handle_error "Failed to make uninstall.sh executable"
+chmod +x "$SCRIPT_DIR/mac_cleanup.sh" || handle_error "Failed to make mac_cleanup.sh executable"
+chmod +x "$SCRIPT_DIR/launcher_qemu.py" || handle_error "Failed to make launcher_qemu.py executable"
+chmod +x "$SCRIPT_DIR/setup/setup_python.sh" || handle_error "Failed to make setup_python.sh executable"
+chmod +x "$SCRIPT_DIR/setup/setup_directory.py" || handle_error "Failed to make setup_directory.py executable"
+chmod +x "$SCRIPT_DIR/setup/setup_nix.py" || handle_error "Failed to make setup_nix.py executable"
+chmod +x "$SCRIPT_DIR/setup/setup_qemu.py" || handle_error "Failed to make setup_qemu.py executable"
+chmod +x "$SCRIPT_DIR/setup/setup_image.py" || handle_error "Failed to make setup_image.py executable"
+chmod +x "$SCRIPT_DIR/setup/setup_compression_status.py" || handle_error "Failed to make setup_compression_status.py executable"
+chmod +x "$SCRIPT_DIR/setup/flake_qemu.nix" || handle_error "Failed to make flake_qemu.nix executable"
 
 style_text "Do you want to install or uninstall a Xilinx product? (Type 'install' or 'uninstall')"
 read -p "Choice: " choice
 
 if [ "$choice" = "install" ]; then
     style_text "Installing Xilinx product..."
-    ./setup/setup_python.sh
+    "$SCRIPT_DIR/setup/setup_python.sh" || handle_error "Failed to install Xilinx product"
 elif [ "$choice" = "uninstall" ]; then
     style_text "Uninstalling Xilinx product..."
-    ./uninstall.sh
-    ./mac_cleanup.sh
+    "$SCRIPT_DIR/uninstall.sh" || handle_error "Failed to uninstall Xilinx product"
+    "$SCRIPT_DIR/mac_cleanup.sh" || handle_error "Failed to perform Mac cleanup"
 else
     style_text "Invalid choice. Please enter 'install' or 'uninstall'."
     exit 1
