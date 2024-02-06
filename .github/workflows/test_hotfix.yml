@@ -1,4 +1,4 @@
-name: Qemu Setup
+name: Hotfix Test
 
 on:
   push:
@@ -16,13 +16,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Make the script `setup_nix.py` executable
+    - name: Make the scripts executable
       run: |
+      sudo chmod +x ./hotfix.py
       sudo chmod +x ./setup/setup_nix.py
       sudo chmod +x ./setup/setup_qemu.py
       sudo chmod +x ./setup/flake_qemu.nix
 
-    - name: Run script `setup_nix.py`
+    - name: Run script `hotfix.py`
       run: |
        python3 ./setup/setup_nix.py
        python3 ./setup/setup_qemu.py

@@ -1,4 +1,4 @@
-name: Run Script | Case Install
+name: Run Script Test | Case Install
 
 on:
   push:

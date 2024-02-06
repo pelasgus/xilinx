@@ -1,4 +1,4 @@
-name: Nix Setup
+name: Nix Setup Test
 
 on:
   push:

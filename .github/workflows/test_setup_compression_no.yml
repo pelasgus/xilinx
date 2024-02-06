@@ -1,4 +1,4 @@
-name: Compression Status | Case No
+name: Compression Status Test | Case No
 
 on:
   push:

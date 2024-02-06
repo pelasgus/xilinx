@@ -1,4 +1,4 @@
-name: Qemu Setup
+name: Qemu Setup Test
 
 on:
   push:
