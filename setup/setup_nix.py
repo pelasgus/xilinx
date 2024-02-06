@@ -3,6 +3,7 @@
 
 import os
 import subprocess
+import sys
 
 # Add parent directory to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
