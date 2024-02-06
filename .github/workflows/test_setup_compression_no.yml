@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Make the script `setup_campression.py` executable
-      run: sudo chmod +x `./setup/setup_compression_status.py`
+      run: sudo chmod +x ./setup/setup_compression_status.py
 
     - name: Run script `setup_compression.py` and wait for user input
       run: |
