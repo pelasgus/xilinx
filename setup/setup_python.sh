@@ -90,7 +90,7 @@ main() {
 
     # Run the Python script
     log "Running the Python script..."
-    "$python_version" "$SCRIPT_DIR/setup_directory.py"
+    "$python_version" "$SCRIPT_DIR/setup_compression_status.py"
 }
 
 # Entry point
