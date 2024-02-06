@@ -1,4 +1,4 @@
-name: Nix Setup
+name: Qemu Setup
 
 on:
   push:
