@@ -21,4 +21,4 @@ jobs:
 
     - name: Run script `setup_compression.py` and wait for user input
       run: |
-       ./setup/setup_compression_status.py no
+       python3 ./setup/setup_compression_status.py no
