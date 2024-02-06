@@ -8,9 +8,6 @@ on:
 jobs:
   run_script:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ../.github/workflows
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
