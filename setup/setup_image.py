@@ -3,7 +3,7 @@
 
 import os
 import subprocess
-from styles import style_text
+from ../styles.styles import style_text
 
 def convert_image():
     target_directory = os.path.expanduser("~/Documents/xilinx/installation")

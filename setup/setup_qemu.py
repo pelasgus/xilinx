@@ -2,7 +2,7 @@
 # author: D.A.Pelasgus
 
 import subprocess
-from styles import style_text
+from ../styles.styles import style_text
 
 def install_qemu():
     print(style_text("Checking if QEMU is installed..."))

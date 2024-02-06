@@ -3,7 +3,7 @@
 
 import os
 import subprocess
-from styles import style_text
+from ../styles.styles import style_text
 
 def install_nix():
     print(style_text("Checking if Nix is installed..."))

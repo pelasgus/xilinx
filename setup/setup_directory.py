@@ -6,7 +6,7 @@ import shutil
 import tarfile
 import zipfile
 import subprocess
-from styles import style_text
+from ../styles.styles import style_text
 
 def unzip_untar_move_cleanup():
     # Step 1: Request user to enter a path

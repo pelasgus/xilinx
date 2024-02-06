@@ -2,7 +2,7 @@
 # author: D.A.Pelasgus
 
 import subprocess
-from styles import style_text
+from ../styles.styles import style_text
 
 def prompt_user():
     choice = input(style_text("Do you require assistance with compression? (y/n): ")).strip().lower()
