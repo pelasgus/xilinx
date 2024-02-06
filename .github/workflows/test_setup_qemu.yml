@@ -18,9 +18,9 @@ jobs:
 
     - name: Make the script `setup_nix.py` executable
       run: |
-      sudo chmod +x ./setup/setup_nix.py
-      sudo chmod +x ./setup/setup_qemu.py
-      sudo chmod +x ./setup/flake_qemu.nix
+       sudo chmod +x ./setup/setup_nix.py
+       sudo chmod +x ./setup/setup_qemu.py
+       sudo chmod +x ./setup/flake_qemu.nix
 
     - name: Run script `setup_nix.py`
       run: |
