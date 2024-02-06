@@ -1,4 +1,4 @@
-name: Run Script | Case Install
+name: Compression Status | Case No
 
 on:
   push:
@@ -16,9 +16,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Make the script `run.sh` executable
+    - name: Make the script `setup_campression.py` executable
       run: chmod +x `./setup/setup_compression_status.py`
 
-    - name: Run script `run.sh` and wait for user input
+    - name: Run script `setup_compression.py` and wait for user input
       run: |
-        python3 ./setup/setup_compression_status.py no
+       ./setup/setup_compression_status.py no

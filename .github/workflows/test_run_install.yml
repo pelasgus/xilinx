@@ -1,0 +1,24 @@
+name: Run Script | Case Install
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_script:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Make the script `run.sh` executable
+      run: chmod +x run.sh
+
+    - name: Run script `run.sh` and wait for user input
+      run: |
+        sudo ./run.sh install
