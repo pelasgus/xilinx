@@ -17,8 +17,8 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Make the script `run.sh` executable
-      run: chmod +x `/setup/setup_compression_status.sh`
+      run: chmod +x `./setup/setup_compression_status.py`
 
     - name: Run script `run.sh` and wait for user input
       run: |
-        python3 ./setup/setup_compression_status.sh no
+        python3 ./setup/setup_compression_status.py no
