@@ -1,4 +1,4 @@
-name: Run Script
+name: Run Script | Case Install
 
 on:
   push:
@@ -17,9 +17,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Make run.sh executable
+    - name: Make  the script `run.sh` executable
       run: chmod +x run.sh
 
-    - name: Run run.sh
+    - name: Run script `run.sh`
       run: sudo ./run.sh
+
+    - name: Type 'install' to check the install scenario
       run: echo "install"
