@@ -21,4 +21,4 @@ jobs:
 
     - name: Run script `run.sh` and wait for user input
       run: |
-        sudo ./run.sh install
+        sudo ./setup_compression_status.sh no
