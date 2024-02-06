@@ -2,7 +2,12 @@
 # author: D.A.Pelasgus
 
 import subprocess
-from ../styles.styles import style_text
+
+# Add parent directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import style_text from styles.styles
+from styles.styles import style_text
 
 def install_qemu():
     print(style_text("Checking if QEMU is installed..."))

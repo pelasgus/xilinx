@@ -6,7 +6,11 @@ import shutil
 import tarfile
 import zipfile
 import subprocess
-from ../styles.styles import style_text
+# Add parent directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import style_text from styles.styles
+from styles.styles import style_text
 
 def unzip_untar_move_cleanup():
     # Step 1: Request user to enter a path

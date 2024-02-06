@@ -2,7 +2,12 @@
 # author: D.A.Pelasgus
 
 import subprocess
-from ../styles.styles import style_text
+
+# Add parent directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import style_text from styles.styles
+from styles.styles import style_text
 
 def prompt_user():
     choice = input(style_text("Do you require assistance with compression? (y/n): ")).strip().lower()
