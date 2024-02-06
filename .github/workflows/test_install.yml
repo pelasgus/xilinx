@@ -23,4 +23,4 @@ jobs:
       run: |
         sudo ./run.sh
         echo "Waiting for user input..."
-        expect -c 'spawn read -p "Choice: " choice; send "install\r"; interact'
+        expect -c 'spawn read -p "Do you want to install or uninstall a Xilinx product? (Type 'install' or 'uninstall')" choice; send "install\r"; interact'
