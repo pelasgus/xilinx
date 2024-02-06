@@ -23,4 +23,4 @@ jobs:
       run: |
         sudo ./run.sh
         echo "Waiting for user input..."
-        expect -c 'spawn read -p "Enter input: " user_input; send "install\r"; interact'
+        expect -c 'spawn read -p "Choice: " choice; send "install\r"; interact'
