@@ -6,6 +6,16 @@
 # Import styles.sh
 source ./styles/styles.sh
 
+style_text "Welcome to Xilinx Product Installer/Uninstaller"
+
+# Check if script is running as root
+if [ "$EUID" -ne 0 ]; then
+  style_text "This script requires root privileges. Please enter your password when prompted."
+  sudo -k  # Reset timestamp before prompting for password
+  sudo "$0" "$@"  # Re-run the script with sudo
+  exit $?
+fi
+
 # Make scripts executable
 chmod +x ./styles/styles.py
 chmod +x ./styles/styles.sh
@@ -19,16 +29,6 @@ chmod +x ./setup/setup_qemu.py
 chmod +x ./setup/setup_image.py
 chmod +x ./setup/setup_compression_status.py
 chmod +x ./setup/flake_qemu.nix
-
-style_text "Welcome to Xilinx Product Installer/Uninstaller"
-
-# Check if script is running as root
-if [ "$EUID" -ne 0 ]; then
-  style_text "This script requires root privileges. Please enter your password when prompted."
-  sudo -k  # Reset timestamp before prompting for password
-  sudo "$0" "$@"  # Re-run the script with sudo
-  exit $?
-fi
 
 style_text "Do you want to install or uninstall a Xilinx product? (Type 'install' or 'uninstall')"
 read -p "Choice: " choice
