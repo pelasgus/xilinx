@@ -16,11 +16,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Make  the script `run.sh` executable
+    - name: Make the script `run.sh` executable
       run: chmod +x run.sh
 
-    - name: Run script `run.sh`
-      run: sudo ./run.sh
+    - name: Run script `run.sh` and wait for user input
+      run: |
+        sudo ./run.sh
+        echo "Waiting for user input..."
+        expect -c 'spawn read user_input; send "$user_input\r"; interact'
 
     - name: Type 'install' to check the install scenario
-      run: echo "install\r"
+      run: echo "install"
