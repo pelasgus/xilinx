@@ -1,0 +1,24 @@
+name: Nix Setup
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_script:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Make the script `setup_nix.py` executable
+      run: sudo chmod +x ./setup/setup_nix.py
+
+    - name: Run script `setup_nix.py`
+      run: |
+       python3 ./setup/setup_nix.py
