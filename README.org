@@ -1,0 +1,9 @@
+#+TITLE: Pelasgian Operating System Channel 
+#+SUBTITLE: A curated package distribution channel.
+#+AUTHOR: D.A.Pelasgus
+
+* 🧰｜Setup
+- Install nushell.
+- Download xilinx.nu
+
+💡｜N.B.: The =xilinx.nu= script will install guix on the host and then install all necessary packages for xilinx to work via qemu.
